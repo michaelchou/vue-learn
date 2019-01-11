@@ -25,7 +25,7 @@ for (let key in arr) {
 // 不包含数组的私有属性
 // for不可遍历对象
 for (let key of arr) {
-    console.log(typeof key);    // String String String String String
+    console.log(typeof key);    // number number number number number
     console.log(key);   // 1 2 3 4 5
 }
 let obj = { school: 'hello', age: 'world' };
