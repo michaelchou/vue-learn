@@ -77,3 +77,43 @@ let _every = arr3.every(function (item) {    // 找到具体的某一项用find
     return item.toString().indexOf('5') > -1;
 });
 console.log(_every);    // false
+
+// 8.reduce 收敛函数 4个参数  返回的事叠加后的结果 回调函数返回的结果 原数组不发生变换
+// 1次循环 previousValue 代表的数组的第一项，currentValue的第二项
+// 2次循环 previousValue 是undefined，currentValue是第三项
+// 单数组对象求和
+let sum = [1, 2, 3, 4, 5].reduce(function (previousValue, currentValue, currentIndex, array) {
+    // [Arguments] { '0': 1, '1': 2, '2': 1, '3': [ 1, 2, 3, 4, 5 ] }
+    // [Arguments] { '0': undefined, '1': 3, '2': 2, '3': [ 1, 2, 3, 4, 5 ] }
+    // [Arguments] { '0': undefined, '1': 4, '2': 3, '3': [ 1, 2, 3, 4, 5 ] }
+    // [Arguments] { '0': undefined, '1': 5, '2': 4, '3': [ 1, 2, 3, 4, 5 ] }
+    // console.log(arguments);
+
+    // 1 2
+    // undefined 3
+    // undefined 4
+    // undefined 5
+    console.log(previousValue, currentValue);
+    return previousValue + currentValue; // 本次的返回值会作为下一次循环中的previousValue
+});
+console.log(sum);   // 15
+
+// 对象数据求和
+let sum2 = [{ price: 30, count: 2 }, { price: 30, count: 3 }, { price: 30, count: 4 }].reduce(function (previousValue, currentValue) {
+    // { price: 30, count: 2 } { price: 30, count: 3 }
+    // undefined { price: 30, count: 4 }
+    console.log(previousValue, currentValue);
+    // { price: 30, count: 2 } { price: 30, count: 3 }
+    // 180 { price: 30, count: 4 }
+    // 停止计算，返回NaN
+    // return previousValue.price * currentValue.count + currentValue.price * currentValue.count;
+    return previousValue + currentValue.price * currentValue.count;
+}, 0);  // 默认指定第一次 initialValue
+
+console.log(sum2)   // 270 [0, { price: 30, count: 2 }, { price: 30, count: 3 }, { price: 30, count: 4 }]
+
+// 二维数组合并为一维
+let arr2_1 = [[1,2,3],[4,5,6],[7,8,9]].reduce(function (previousValue, currentValue) {
+    return previousValue.concat(currentValue);
+})
+console.log(arr2_1);    // [ 1, 2, 3, 4, 5, 6, 7, 8, 9 ]
