@@ -14,6 +14,27 @@
 ## es6: includes reduce
 
 
+## 框架和库
+- 框架 vue 拥有完整的解决方案 
+- 库 jquery underscore zepto animate.css
+
+## 渐进式 （渐进增强）
+- vue全家桶 vue、vue-router、vuex、axios
+- 通过组合完成一个完整的框架
+
+## Vue的两个核心点
+- 响应的数据变化
+
+## MVVM模式（数据双向绑定angular、vue）
+- model 数据
+- view 视图
+- viewmodel 视图模型
+
+## 安装Vue
+- cdn的方式
+- npm安装 node package manager 
+- npm init 初始化产生一个package.json的文件，这个文件用来描述项目的依赖，不能有大写，特殊字符
+
 
 ## vscode常用快捷键
 - 新建文件 Ctrl+N
