@@ -28,7 +28,7 @@ for (let key of arr) {
     console.log(typeof key);    // number number number number number
     console.log(key);   // 1 2 3 4 5
 }
-let obj = { school: 'hello', age: 'world' };
+let obj = {school: 'hello', age: 'world'};
 // for (let key of obj) {
 //     console.log(key);   // obj is not iterable
 // }
@@ -99,7 +99,10 @@ let sum = [1, 2, 3, 4, 5].reduce(function (previousValue, currentValue, currentI
 console.log(sum);   // 15
 
 // 对象数据求和
-let sum2 = [{ price: 30, count: 2 }, { price: 30, count: 3 }, { price: 30, count: 4 }].reduce(function (previousValue, currentValue) {
+let sum2 = [{price: 30, count: 2}, {price: 30, count: 3}, {
+    price: 30,
+    count: 4
+}].reduce(function (previousValue, currentValue) {
     // { price: 30, count: 2 } { price: 30, count: 3 }
     // undefined { price: 30, count: 4 }
     console.log(previousValue, currentValue);
@@ -110,10 +113,10 @@ let sum2 = [{ price: 30, count: 2 }, { price: 30, count: 3 }, { price: 30, count
     return previousValue + currentValue.price * currentValue.count;
 }, 0);  // 默认指定第一次 initialValue
 
-console.log(sum2)   // 270 [0, { price: 30, count: 2 }, { price: 30, count: 3 }, { price: 30, count: 4 }]
+console.log(sum2);   // 270 [0, { price: 30, count: 2 }, { price: 30, count: 3 }, { price: 30, count: 4 }]
 
 // 二维数组合并为一维
-let arr2_1 = [[1,2,3],[4,5,6],[7,8,9]].reduce(function (previousValue, currentValue) {
+let arr2_1 = [[1, 2, 3], [4, 5, 6], [7, 8, 9]].reduce(function (previousValue, currentValue) {
     return previousValue.concat(currentValue);
-})
+});
 console.log(arr2_1);    // [ 1, 2, 3, 4, 5, 6, 7, 8, 9 ]

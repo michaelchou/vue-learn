@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>HelloWorld</title>
+    <script src="./node_modules/vue/dist/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <!--moustache 小胡子语法 表达式，可以赋值、取值、三元表达式-->
+        <h1>{{msg}}</h1>
+        <h2>{{msg2==="hello,einstein!!!"?"你好，Einstein":0}}</h2>
+    </div>
+
+    <script>
+        // 引入vue.js后即可获取到Vue的构造函数
+        let vm = new Vue({  // vm:viewModel
+            el: "#app",  // 告诉Vue管理html中哪个部分,querySelector
+            data: {msg: "hello,world!!!", msg2: "hello,einstein!!!"},   // data中的数据会被vm所代理,可以通过vm.msg取到对应的内容
+        }); // Object.defineProperty定义属性
+    </script>
+
+</body>
+
+</html>

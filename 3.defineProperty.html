@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>HelloWorld</title>
+    <script src="./node_modules/vue/dist/vue.js"></script>
+</head>
+<body>
+<input type="text" id="_input">
+<script>
+    let obj = {};
+    // Object.defineProperty(obj, "name", {
+    //     configurable: true, // 是否可以删除属性
+    //     writable: false, // 是否可以从新赋值
+    //     enumerable: false,   // 是否可枚举
+    //     value: 1,
+    // });
+    // obj.name = 100;
+    let temp = {};
+    let input = document.getElementById("_input");
+    Object.defineProperty(obj, "name", {
+        get() { // 取obj的那么属性会触发
+            return temp["name"];
+        },
+        set(v) {    // 给obj赋值会触发set方法
+            console.log(v);
+            temp["name"] = v;   // 改变temp的结果
+            input.value = v;    // 将值赋予输入框
+        }
+    })
+
+    input.value = obj.name; // 页面一加载时，会调用get方法
+    input.addEventListener("input", function () {   // 等待输入框的裱花
+        obj.name = this.value;  // 当值变化时会调用set方法
+    });
+
+</script>
+
+</body>
+
+</html>

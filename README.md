@@ -30,10 +30,15 @@
 - view 视图
 - viewmodel 视图模型
 
+## Object.defineProperty(ECMAScript5)没有替代方案
+- 不支持ie8及以下的原因
+
 ## 安装Vue
-- cdn的方式
-- npm安装 node package manager 
+### cdn的方式
+### npm安装 node package manager，vue代码会发布于nodejs.com
 - npm init 初始化产生一个package.json的文件，这个文件用来描述项目的依赖，不能有大写，特殊字符
+- npm init -y;一键安装初始化
+- npm install vue;
 
 
 ## vscode常用快捷键
