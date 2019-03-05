@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Einstein's v-for</title>
+</head>
+<body>
+<!-- 以前的方式：拼接字符串 innerHtml 操作dom，重新渲染，性能差 -->
+
+<!-- vue提供了一个directive， v-for解决循环问题 性能更高效，会复用原有的结构 -->
+<div id="app">
+    <!-- 要循环哪个就在哪个上面加v-for属性 -->
+    <!-- 默认value of 数组 / (value, index) of 数组 -->
+    <!-- 默认value in 数组 / (value, index) in 数组 -->
+    <ul>
+        <li v-for="(fruit, index) of fruits">{{fruit.name}} {{index}}</li>
+    </ul>
+
+    <!-- 双重循环 -->
+    <ul>
+        <li v-for="(fruit, index) in fruits2">
+            {{index+1}}.{{fruit.name}}
+            <ul>
+                <li v-for="(color, index2) in fruit.color">
+                    {{index+1}}.{{index2+1}} {{color}}
+                </li>
+            </ul>
+        </li>
+    </ul>
+
+    <!--循环string-->
+    <div v-for="c in 'aaa'">{{c}}</div>
+
+    <!--循环number-->
+    <div v-for="c in 5">{{c}}</div>
+
+    <!--循环对象-->
+    <div v-for="(value, key, index) in obj">{{key}}:{{value}}:{{index}}</div>
+
+</div>
+<script src="./node_modules/vue/dist/vue.js"></script>
+<script>
+    // 至多使用二维数组，不建议使用三维数组，遍历性能太差
+    let vm = new Vue({
+        el: "#app",
+        data: {
+            fruits: [{name: "香蕉"}, {name: "苹果"}, {name: "西瓜"}],
+            fruits2: [
+                {name: "香蕉", color: ["green", "yellow"]},
+                {name: "苹果", color: ["red", "green", "yellow"]},
+                {name: "西瓜", color: ["pink"]}
+            ],
+            obj: {name: "einstein", age: 23, address:"xxx"},
+        }
+    })
+</script>
+</body>
+</html>

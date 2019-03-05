@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Einstein's Reactivity</title>
+    <!-- 响应式的数据变化 -->
+</head>
+<body>
+<div id="app">
+    {{a.school}}
+</div>
+<script src="./node_modules/vue/dist/vue.js"></script>
+<script>
+    // vue会循环data中的数据（数据劫持），依次的增加getter和setter
+    let vm = new Vue({
+        el: "#app",
+        data: {
+            a: {
+                school: "test",
+            },
+        }
+    });
+    // 1、使用变量时一定要先初始化，否则新加的属性不会导致页面的刷新
+
+    // 2、.$set方法可以给对象添加响应式的数据变化
+    vm.$set(vm.a, "school", 1);
+
+    // 3、替换原对象
+    vm.a = {school: "einstein"};
+
+</script>
+</body>
+</html>

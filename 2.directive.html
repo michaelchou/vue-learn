@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Einstein's HelloWorld</title>
+</head>
+<body>
+<div id="app">
+
+    <h1>{{msg}}</h1>
+
+    <!-- 表单元素 input checkbox textarea radio select -->
+    <!-- vue的"指令" directive 只是dom上的行间属性，vue给这类属性赋予了一定的意义来实现特殊的功能
+    所有指令都以"v-"开头,value属性默认情况会被vue忽略，selected、checked都没有意义-->
+
+    <!-- v-model双向绑定，会将msg的值赋予输入框，输入框的值会影响数据-->
+    <input type="text" v-model="msg">
+
+    <!-- Object.defineProperty ES5  见3.defineProperty.html -->
+    <!-- v-text === {{}} 解决由于浏览器性能或者网速问题导致的vue数据渲染慢出现的{{}} -->
+    <div v-text="msg"></div>
+
+    <!-- v-once 只绑定一次，当数据发生变换，该内容不变 -->
+    <div v-once>{{msg + msg}}</div>
+
+    <!-- v-html 把html字符串当作html渲染，一定是可信任的html（存在脚本嵌入攻击） -->
+    <div v-html="h1"></div>
+</div>
+
+<script src="./node_modules/vue/dist/vue.js"></script>
+
+<script>
+    let vm = new Vue({
+        el: "#app",
+        data: {
+            msg: "hello,world!!!",
+            h1: "<h1>hello,einstein</h1>",
+        },
+    });
+</script>
+
+</body>
+
+</html>

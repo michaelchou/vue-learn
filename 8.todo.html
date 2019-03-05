@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Einstein's TODO</title>
+</head>
+<body>
+<div id="app">
+    <!--键盘修饰符-->
+    <input type="text" v-model="val" @keyup.enter="add">
+    <ul>
+        <li v-for="(a, i) in arr">
+            {{a}}
+            <button @click="remove(i)">删除</button>
+        </li>
+    </ul>
+</div>
+<script src="./node_modules/vue/dist/vue.js"></script>
+<script>
+    let vm = new Vue({
+        el: "#app",
+        data: {
+            arr: new Array(),
+            val: "",
+        },
+        methods: {
+            add() {
+                // if (event.keyCode === 13) {
+                //     this.arr.unshift(this.val);
+                //     this.val = "";
+                // }
+                // keyCode的事件用法已经被废弃了，并可能不会被新的浏览器所支持
+                this.arr.unshift(this.val);
+                this.val = "";
+            },
+            remove(i) {
+                this.arr = this.arr.filter((item, index) => index !== i);
+            }
+        }
+    })
+</script>
+</body>
+</html>
