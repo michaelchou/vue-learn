@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Einstein's cart</title>
-    <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.css">
+    <link rel="stylesheet" href="./node_modules/bootstrap/dist/css/bootstrap.css">
 </head>
 <body>
 <div id="app">
@@ -22,7 +22,8 @@
                         全选
                         <input
                                 type="checkbox"
-                                v-model="selectAll">
+                                v-model="checkAll"
+                                @change="selectAll">
                     </th>
                     <td>商品</td>
                     <td>单价</td>
@@ -34,7 +35,8 @@
                     <td>
                         <input
                                 type="checkbox"
-                                v-model="product.isSelected">
+                                v-model="product.isSelected"
+                                @change="selectItem">
                     </td>
                     <td>
                         <!--:号和v-bind指令是等价，动态-->
@@ -61,7 +63,7 @@
                     <td colspan="6">
                         <!--{{sum()}}数据一变化就会重新调用此函数，算出最新的结果,不会缓存上一次的结果-->
                         <!--computed可以解决该问题                        -->
-                        总价格：{{sum | toFixed(2)}}
+                        总价格：{{sum() | toFixed(2)}}
                     </td>
                 </tr>
             </table>
@@ -69,15 +71,15 @@
 
     </div>
 </div>
-<script src="../node_modules/vue/dist/vue.js"></script>
+<script src="./node_modules/vue/dist/vue.js"></script>
 <!--基于promise-->
-<script src="../node_modules/axios/dist/axios.js"></script>
+<script src="./node_modules/axios/dist/axios.js"></script>
 <script>
     let vm = new Vue({
         el: "#app",
         data: {
             products: [],
-            // checkAll: false,    // 是否全选
+            checkAll: false,    // 是否全选
         },
         // created为钩子函数，在数据初始化后被调用，this指向的也是vm实例
         // 专门用来发送ajax请求的方法
@@ -88,45 +90,20 @@
             getData() {
                 axios.get('./mock/cart.json').then(response => {
                     this.products = response.data;
+                    this.selectAll();
                 }, error => {
                     console.log(error);
                 });
             },
             remove(pro) {
                 this.products = this.products.filter(item => item != pro);
-            }
-        },
-        // 可以有很多的过滤器
-        // filter中的this是window
-        filters: {
-            toFixed(input, param1) {
-                return "￥" + input.toFixed(param1);  // input是默认要过滤的内容，param1是第一个参数
-            }
-        },
-        // 当给全选赋值时要影响其他人的影响
-        // 当页面刷新时，获取全选值是根据下面的checkbox计算出来的结果
-        // 类似于Object.defineProperty
-        computed: { // 放在computed中也会放在vm上，不能和data和methods重名
-            selectAll: {
-                // 当products变化时会重新计算
-                get() { // get和set中this指向实例
-                    return this.products.every(item => item.isSelected);
-                },
-                set(val) {
-                    this.products.forEach(item => item.isSelected = val);
-                }
             },
-            // sum: {  // sum的结果会被缓存，如果依赖的数据没有变化，就不会重新执行
-            //     get() {
-            //         return this.products.reduce((previousValue, currentValue) => {
-            //             if (!currentValue.isSelected) {
-            //                 return previousValue;
-            //             }
-            //             return previousValue + currentValue.productPrice * currentValue.productCount;
-            //         }, 0);
-            //     }
-            // }
-            // 在computed中，如果把属性写成函数，默认调用的就是get方法
+            selectAll() {
+                this.products.forEach(item => item.isSelected = this.checkAll);
+            },
+            selectItem() {
+                this.checkAll = this.products.every(item => item.isSelected);   // 有一个false表示找到，停止循环
+            },
             sum() {
                 return this.products.reduce((previousValue, currentValue) => {
                     if (!currentValue.isSelected) {
@@ -135,7 +112,16 @@
                     return previousValue + currentValue.productPrice * currentValue.productCount;
                 }, 0);
             }
+
+        },
+        // 可以有很多的过滤器
+        // filter中的this是window
+        filters: {
+            toFixed(input, param1) {
+                return "￥" + input.toFixed(param1);  // input是默认要过滤的内容，param1是第一个参数
+            }
         }
+
     });
 </script>
 </body>

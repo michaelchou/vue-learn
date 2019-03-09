@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Einstein's transition</title>
-    <link rel="stylesheet" href="../node_modules/animate.css/animate.css">
+    <link rel="stylesheet" href="./node_modules/animate.css/animate.css">
     <style>
         div>div {
             width: 100px;
@@ -21,30 +21,21 @@
     <!--隐藏-->
     <!--只有dom从显示到隐藏或者隐藏到显示才能使用vue的动画-->
     <!--transition组件，vue自带-->
-    <transition-group enter-active-class="animated bounceInUp" leave-active-class="animated bounceOutDown">
-        <!--v-for默认会复用原有的dom元素，如果加了key，而且key不同则认为两个不相同的dom-->
-        <div v-for="(a, index) in newArr" :key="Math.random()">{{a}}</div>
-    </transition-group>
+    <transition enter-active-class="animated bounceInUp" leave-active-class="animated bounceOutDown">
+        <div v-show="flag">Einstein</div>
+    </transition>
 
     <!--删除-->
-    <!--<div v-if="flag">Einstein2</div>-->
+    <div v-if="flag">Einstein2</div>
 
-    <input type="text" v-model="query">
     <button @click="flag=!flag">切换</button>
 </div>
-<script src="../node_modules/vue/dist/vue.js"></script>
+<script src="./node_modules/vue/dist/vue.js"></script>
 <script>
     let vm = new Vue({
         el: "#app",
         data: {
-            flag: true,
-            arr:[1,2,3,4,5],
-            query:"",
-        },
-        computed: {
-            newArr() {
-                return this.arr.filter(item=>item==this.query);
-            }
+            flag: true
         }
     })
 </script>
