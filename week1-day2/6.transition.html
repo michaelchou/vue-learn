@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Einstein's transition</title>
+    <style>
+        div>div {
+            width: 100px;
+            height: 100px;
+            background: red;
+        }
+        .e-enter {
+         opacity: 0;
+        }
+        .e-enter-active {
+            transition: 1s linear;
+        }
+        .e-leave-active {
+            opacity: 0;
+            transition: 1s linear;
+        }
+    </style>
+</head>
+<body>
+<div id="app">
+    <!--v-if="true" v-show="true" -->
+    <!--v-if操作的是dom，当数据能一开始确定，不会频繁变化-->
+    <!--v-show操作的是样式，存在频繁操作dom的使用-->
+    <!--隐藏-->
+    <!--只有dom从显示到隐藏或者隐藏到显示才能使用vue的动画-->
+    <!--transition组件，vue自带-->
+    <transition name="e">
+        <div v-show="flag">Einstein</div>
+    </transition>
+
+    <!--删除-->
+    <div v-if="flag">Einstein2</div>
+
+    <button @click="flag=!flag">切换</button>
+</div>
+<script src="../node_modules/vue/dist/vue.js"></script>
+<script>
+    let vm = new Vue({
+        el: "#app",
+        data: {
+            flag: true
+        }
+    })
+</script>
+</body>
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Einstein's cart of axios promise</title>
+    <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.css">
+</head>
+<body>
+<div id="app">
+
+</div>
+<script src="../node_modules/vue/dist/vue.js"></script>
+<!--基于promise-->
+<script src="../node_modules/axios/dist/axios.js"></script>
+<script>
+    let vm = new Vue({
+        el: "#app",
+        data: {
+            products: [],
+        },
+        // created为钩子函数，在数据初始化后被调用，this指向的也是vm实例
+        // 专门用来发送ajax请求的方法
+        created() {
+            // Promise，解决回调函数的问题
+            axios.get('./mock/cart.json').then(response => {
+                this.products = response.data;
+            }, error => {
+                console.log(error);
+            });
+        },
+
+    });
+</script>
+</body>
+</html>
