@@ -49,3 +49,7 @@
 - 上下复制一行 Shift+Alt+Up 或 Shift+Alt+Down
 - 在当前行插入一行 Ctrl+Enter
 - 在当前行上方插入一行 Shift+Ctrl+Enter
+- 快速补全新建HTML文件默认代码
+    - 新建文件
+    - 点击右下角文档格式：纯文本，上方弹出框中输入html，修改文档格式
+    - 输入"!"，按tab选择即可

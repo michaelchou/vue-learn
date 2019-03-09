@@ -18,11 +18,8 @@
   },
   "homepage": "https://github.com/michaelchou/vue-learn#readme",
   "dependencies": {
-    "animate.css": "^3.7.0",
     "axios": "^0.18.0",
     "bootstrap": "^4.3.1",
-    "swiper": "^4.5.0",
-    "vue": "^2.6.8",
-    "vuex": "^3.1.0"
+    "vue": "^2.6.8"
   }
 }
