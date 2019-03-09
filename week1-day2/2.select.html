@@ -2,18 +2,26 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Einstein's radiobutton</title>
+    <title>Einstein's select</title>
 </head>
 <body>
 <div id="app">
-
+    <!--如果value属性不写默认取的是option中的值，请选择这一项要加disabled-->
+    <!--如果select是多选框，则数据类型要是数组类型-->
+    <select v-model="select" multiple>
+        <option value="" disabled>请选择</option>
+        <option value="1">男</option>
+        <option value="2">女</option>
+        <option value="3">其他</option>
+    </select>
+    {{select}}
 </div>
 <script src="../node_modules/vue/dist/vue.js"></script>
 <script>
     let vm = new Vue({
         el: "#app",
         data: {
-
+            select: []
         }
     })
 </script>

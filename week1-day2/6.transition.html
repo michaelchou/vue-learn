@@ -3,22 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <title>Einstein's transition</title>
+    <link rel="stylesheet" href="../node_modules/animate.css/animate.css">
     <style>
         div>div {
             width: 100px;
             height: 100px;
             background: red;
         }
-        .e-enter {
-         opacity: 0;
-        }
-        .e-enter-active {
-            transition: 1s linear;
-        }
-        .e-leave-active {
-            opacity: 0;
-            transition: 1s linear;
-        }
+
     </style>
 </head>
 <body>
@@ -29,7 +21,7 @@
     <!--隐藏-->
     <!--只有dom从显示到隐藏或者隐藏到显示才能使用vue的动画-->
     <!--transition组件，vue自带-->
-    <transition name="e">
+    <transition enter-active-class="animated bounceInUp" leave-active-class="animated bounceOutDown">
         <div v-show="flag">Einstein</div>
     </transition>
 

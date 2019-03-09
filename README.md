@@ -38,7 +38,7 @@
 ### npm安装 node package manager，vue代码会发布于nodejs.com
 - npm init 初始化产生一个package.json的文件，这个文件用来描述项目的依赖，不能有大写，特殊字符
 - npm init -y;一键安装初始化
-- npm install vue;
+- npm install vue axios bootstrap;
 
 
 ## vscode常用快捷键

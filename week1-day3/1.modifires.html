@@ -2,9 +2,33 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Einstein's modifires</title>
 </head>
 <body>
-
+<div id="app">
+    <div @click="parent">parent
+        <div @click="son">son
+            <div @click.stop="grandson">grandson</div>
+        </div>
+    </div>
+</div>
+<script src="../node_modules/vue/dist/vue.js"></script>
+<script>
+    let vm = new Vue({
+        el: "#app",
+        data: {},
+        methods: {
+            parent() {
+                alert("parent");
+            },
+            son() {
+                alert("son");
+            },
+            grandson() {
+                alert("grandson");
+            }
+        }
+    });
+</script>
 </body>
 </html>

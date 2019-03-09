@@ -2,9 +2,127 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Einstein's cart</title>
+    <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.css">
 </head>
 <body>
+<div id="app">
+    <!--bootstrap 栅格化布局 默认12列（有些框架是8列或24列）-->
+    <!--常见样式：基本样式、增强样式-->
+    <!--default 灰色 success 绿色 danger 红色 warning 警告色 info 浅蓝色 primary 蓝色-->
+    <!--vue的ui框架：bootstrap、iview、mint-ui、element-ui-->
+    <div class="container">
+        <!--每一行又会有12列-->
+        <div class="row">
+            <table class="table table-hover table-bordered">
+                <caption class="h2 text-info text-center">Einstein's cart</caption>
+                <tr>
+                    <!--click点击时checkbox状态还没有改变，所以获取到的值总是相反-->
+                    <th>
+                        全选
+                        <input
+                                type="checkbox"
+                                v-model="checkAll"
+                                @change="selectAll">
+                    </th>
+                    <td>商品</td>
+                    <td>单价</td>
+                    <td>数量</td>
+                    <td>小计</td>
+                    <td>操作</td>
+                </tr>
+                <tr v-for="(product, index) in products">
+                    <td>
+                        <input
+                                type="checkbox"
+                                v-model="product.isSelected"
+                                @change="selectItem">
+                    </td>
+                    <td>
+                        <!--:号和v-bind指令是等价，动态-->
+                        <img :src="product.productCover" :title="product.productName">
+                        {{product.productInfo}}
+                    </td>
+                    <td>
+                        {{product.productPrice}}
+                    </td>
+                    <td>
+                        <!--.number是让输入框的值变成number类型-->
+                        <!--v-model.number.lazy当输入框失去焦点时更新数据-->
+                        <input type="number" v-model.number="product.productCount" min="1">
+                    </td>
+                    <td>
+                        <!--原数据不变的情况，只是改变现实的效果 管道符+函数名-->
+                        {{product.productPrice * product.productCount | toFixed(2)}}
+                    </td>
+                    <td>
+                        <button class="btn btn-danger" @click="remove(product)">删除</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="6">
+                        <!--{{sum()}}数据一变化就会重新调用此函数，算出最新的结果,不会缓存上一次的结果-->
+                        <!--computed可以解决该问题                        -->
+                        总价格：{{sum() | toFixed(2)}}
+                    </td>
+                </tr>
+            </table>
+        </div>
 
+    </div>
+</div>
+<script src="../node_modules/vue/dist/vue.js"></script>
+<!--基于promise-->
+<script src="../node_modules/axios/dist/axios.js"></script>
+<script>
+    let vm = new Vue({
+        el: "#app",
+        data: {
+            products: [],
+            checkAll: false,    // 是否全选
+        },
+        // created为钩子函数，在数据初始化后被调用，this指向的也是vm实例
+        // 专门用来发送ajax请求的方法
+        created() {
+            this.getData();
+        },
+        methods: {
+            getData() {
+                axios.get('./mock/cart.json').then(response => {
+                    this.products = response.data;
+                    this.selectAll();
+                }, error => {
+                    console.log(error);
+                });
+            },
+            remove(pro) {
+                this.products = this.products.filter(item => item != pro);
+            },
+            selectAll() {
+                this.products.forEach(item => item.isSelected = this.checkAll);
+            },
+            selectItem() {
+                this.checkAll = this.products.every(item => item.isSelected);   // 有一个false表示找到，停止循环
+            },
+            sum() {
+                return this.products.reduce((previousValue, currentValue) => {
+                    if (!currentValue.isSelected) {
+                        return previousValue;
+                    }
+                    return previousValue + currentValue.productPrice * currentValue.productCount;
+                }, 0);
+            }
+
+        },
+        // 可以有很多的过滤器
+        // filter中的this是window
+        filters: {
+            toFixed(input, param1) {
+                return "￥" + input.toFixed(param1);  // input是默认要过滤的内容，param1是第一个参数
+            }
+        }
+
+    });
+</script>
 </body>
 </html>

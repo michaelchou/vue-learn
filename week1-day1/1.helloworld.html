@@ -3,11 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <title>HelloWorld</title>
-    <script src="./node_modules/vue/dist/vue.js"></script>
+    <script src="../node_modules/vue/dist/vue.js"></script>
 </head>
 <body>
     <div id="app">
         <!--moustache 小胡子语法 表达式，可以赋值、取值、三元表达式-->
+        <!--尽量少写逻辑运算，将逻辑运算放到computed中-->
         <h1>{{msg}}</h1>
         <h2>{{msg2==="hello,einstein!!!"?"你好，Einstein":0}}</h2>
     </div>
