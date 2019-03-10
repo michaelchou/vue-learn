@@ -6,11 +6,13 @@
 </head>
 <body>
 <div id="app">
-    <div @click="parent">parent
-        <div @click="son">son
+    <div @click.capture="parent">parent
+        <!-- 只绑定一次事件 -->
+        <div @click.self="son">son
             <div @click.stop="grandson">grandson</div>
         </div>
     </div>
+    <a href="http://www.baidu.com" @click.prevent="parent">去百度</a>
 </div>
 <script src="./node_modules/vue/dist/vue.js"></script>
 <script>

@@ -28,7 +28,7 @@ for (let key of arr) {
     console.log(typeof key);    // number number number number number
     console.log(key);   // 1 2 3 4 5
 }
-let obj = {school: 'hello', age: 'world'};
+let obj = { school: 'hello', age: 'world' };
 // for (let key of obj) {
 //     console.log(key);   // obj is not iterable
 // }
@@ -99,7 +99,7 @@ let sum = [1, 2, 3, 4, 5].reduce(function (previousValue, currentValue, currentI
 console.log(sum);   // 15
 
 // 对象数据求和
-let sum2 = [{price: 30, count: 2}, {price: 30, count: 3}, {
+let sum2 = [{ price: 30, count: 2 }, { price: 30, count: 3 }, {
     price: 30,
     count: 4
 }].reduce(function (previousValue, currentValue) {
@@ -120,3 +120,17 @@ let arr2_1 = [[1, 2, 3], [4, 5, 6], [7, 8, 9]].reduce(function (previousValue, c
     return previousValue.concat(currentValue);
 });
 console.log(arr2_1);    // [ 1, 2, 3, 4, 5, 6, 7, 8, 9 ]
+
+let _o = {}
+let _oo = [{ a: 1, b: 2 }, { a: 2, b: 3 }]
+// Object.assign(_o, _oo)
+// for (let value in _o) {
+//     console.log(value)
+// }
+let _result = _oo.some(item=>{
+    console.log('ddddd')
+    if (item.a == 1) {
+        item.a = 3
+    }
+})
+console.log(_oo, _result)
