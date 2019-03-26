@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="app1">{{"Hello World"|my}}</div>
+  <div id="app2">{{"Hello World2"|my}}</div>
+  <script src="./../node_modules/vue/dist/vue.js"></script>
+  <script>
+    Vue.filter("my", data => {    // 全局过滤器
+      return `filters ${data}`;
+    })
+
+    new Vue({
+      el: "#app1",
+      // filters: {
+      //   my(data) {
+      //     return `filters ${data}`;
+      //   }
+      // }
+    });
+
+    new Vue({
+      el: "#app2",
+      // filters: {
+      //   my2(data) {
+      //     return `filters ${ data }`;
+      //   }
+      // }
+    });
+  </script>
+</body>
+
+</html>

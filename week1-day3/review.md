@@ -23,5 +23,10 @@
     ```
     e.srcElement && e.target判断事件绑定事件
     ```
+## filters
+
+## computed 计算“属性” 不是方法
+- 方法不会有缓存，computed会根据依赖的属性进行缓存
+- 两部分组成有get和set（不能只写set，可以单独有get）
 
 
